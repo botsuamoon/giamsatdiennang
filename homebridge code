@@ -1,0 +1,35 @@
+{
+            "accessory": "mqttthing",
+            "type": "outlet",
+            "name": "pow",
+            "url": "192.168.68.120:1883",
+"username": "<username for MQTT (optional)>",
+    "password": "<password for MQTT (optional)>",
+            "topics": {
+                "getOn": "stat/tasmota_D5DCF3/POWER",
+                "setOn": "cmnd/tasmota_D5DCF3/POWER",
+                "getWatts": {
+                    "topic": "tele/tasmota_D5DCF3/SENSOR",
+                    "apply": "return JSON.parse(message).ENERGY.Power;"
+                },
+                "getVolts": {
+                    "topic": "tele/tasmota_D5DCF3/SENSOR",
+                    "apply": "return JSON.parse(message).ENERGY.Voltage;"
+                },
+                "getAmperes": {
+                    "topic": "tele/tasmota_D5DCF3/SENSOR",
+                    "apply": "return JSON.parse(message).ENERGY.Current;"
+                },
+                "getTotalConsumption": {
+                    "topic": "tele/tasmota_D5DCF3/SENSOR",
+                    "apply": "return JSON.parse(message).ENERGY.Total;"
+                },
+                "getInUse": {
+                    "topic": "tele/tasmota_D5DCF3/SENSOR",
+                    "apply": "return (JSON.parse(message).ENERGY.Power > 2) ? 'ON' : 'OFF'"
+                }
+            },
+            "onValue": "ON",
+            "offValue": "OFF",
+            "history": "true"
+        }
